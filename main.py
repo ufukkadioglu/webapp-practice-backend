@@ -1,5 +1,4 @@
-from typing import Union
-
+import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -30,3 +29,7 @@ def read_item(name: str = None):
 def update_user(user: User):
     users.append(user)
     return {"name": user.name, "is_awesome": user.is_awesome}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=5000, log_level="info")
