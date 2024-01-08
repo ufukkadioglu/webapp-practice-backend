@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.responses import PlainTextResponse
 
 app = FastAPI()
 
@@ -19,10 +20,10 @@ def read_root():
 
 
 @app.get("/say_hello")
-def read_item(name: str = None):
+def say_hello(name: str = None):
     if not name and users:
         name = users[-1].name
-    return f"Hello {name}"
+    return PlainTextResponse(f"Hello {name}")
 
 
 @app.put("/users/new")
