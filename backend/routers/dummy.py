@@ -2,6 +2,8 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from fastapi.responses import PlainTextResponse
 
+from utils.singleton_instances import logger
+
 router = APIRouter()
 
 
@@ -15,6 +17,7 @@ users: list[User] = []
 
 @router.get("/")
 def read_root():
+    logger.info("read_root endpoint called, this is a manual log")
     return {"Hello": "World"}
 
 

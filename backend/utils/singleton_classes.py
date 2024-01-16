@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import logging
 
 
 class Singleton:
@@ -15,4 +16,8 @@ class Singleton:
 
 
 class App(Singleton, FastAPI):
+    pass
+
+
+class Logger(Singleton, logging.getLoggerClass()):
     pass
