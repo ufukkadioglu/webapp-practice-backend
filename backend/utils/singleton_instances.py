@@ -1,4 +1,10 @@
-from utils.app_initilalizer import initialize_app
-from utils.singleton_classes import App
+from utils.singleton_classes import App, Logger
 
-app: App = initialize_app()
+app: App
+logger: Logger
+
+
+def initialize_instances(app_instance, logger_instance):
+    global app, logger
+    app = app_instance
+    logger = logger_instance
