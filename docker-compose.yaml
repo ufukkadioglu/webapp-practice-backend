@@ -3,6 +3,6 @@ services:
     awesome-api:
         restart: always
         build:
-            context: .
+            context: ./backend
         ports:
             - "5000:80"
