@@ -23,16 +23,16 @@ handlers:
     when: midnight
     '.':
       suffix: '%Y%m%d'
-  logstash_handler:
-    class: logstash.TCPLogstashHandler
-    host: 127.0.0.1
-    port: 9601
-    level: INFO
-    # formatter: logstash_formatter
-    # ssl_enable: False
-    # ssl_verify: False
-    # transport: logstash_async.transport.BeatsTransport
-    # database_path:
+#  logstash_handler:
+#    class: logstash.TCPLogstashHandler
+#    host: 127.0.0.1
+#    port: 9601
+#    level: INFO
+#    # formatter: logstash_formatter
+#    # ssl_enable: False
+#    # ssl_verify: False
+#    # transport: logstash_async.transport.BeatsTransport
+#    # database_path:
 
 loggers:
   default_logger:
@@ -40,7 +40,7 @@ loggers:
     handlers:
       - console_handler
       - file_handler
-      - logstash_handler
+    # - logstash_handler
     propagate: no
 
 root:
