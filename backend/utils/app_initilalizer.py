@@ -25,5 +25,7 @@ def initialize_app():
 
 def include_all_routers(app):
     from routers import dummy
+    from routers import deployment
 
     app.include_router(dummy.router)
+    app.include_router(deployment.router)
