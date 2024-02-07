@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from utils.my_logger import create_loggers
-from utils.singleton_instances import initialize_instances
+from utils.singleton_instances import set_instances
 
 
 def initialize_app():
@@ -8,9 +8,17 @@ def initialize_app():
 
     logger = create_loggers()
 
-    initialize_instances(app, logger)
+    logger.info("logger created")
+
+    logger.info("Setting singleton instances")
+
+    set_instances(app, logger)
+
+    logger.info("Including routers")
 
     include_all_routers(app)
+
+    logger.info("App ready!")
 
     return app
 

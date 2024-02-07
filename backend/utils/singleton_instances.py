@@ -4,7 +4,7 @@ app: App
 logger: Logger
 
 
-def initialize_instances(app_instance, logger_instance):
+def set_instances(app_instance, logger_instance):
     global app, logger
     app = app_instance
     logger = logger_instance
