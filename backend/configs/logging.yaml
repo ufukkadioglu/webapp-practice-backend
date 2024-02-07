@@ -1,25 +1,50 @@
 version: 1
 disable_existing_loggers: False
 
+# logstash sources:
+# https://logit.io/sources/configure/python/
+
 formatters:
   default_formatter:
-    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format: '%(asctime)s - %(levelname)s - %(message)s'
+  # logstash_formatter:
+  #  class: logstash_async.handler.LogstashFormatter
+
 
 handlers:
-  default_handler:
-    formatter: default_formatter
+  console_handler:
     class: logging.StreamHandler
+    formatter: default_formatter
     stream: ext://sys.stderr
+  file_handler:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: default_formatter
+    filename: ./awesome_api_data/logs/web-app.log
+    when: midnight
+    '.':
+      suffix: '%Y%m%d'
+  logstash_handler:
+    class: logstash.TCPLogstashHandler
+    host: 127.0.0.1
+    port: 9601
+    level: INFO
+    # formatter: logstash_formatter
+    # ssl_enable: False
+    # ssl_verify: False
+    # transport: logstash_async.transport.BeatsTransport
+    # database_path:
 
 loggers:
   default_logger:
-    level: INFO
+    level: DEBUG
     handlers:
-      - default_handler
+      - console_handler
+      - file_handler
+      - logstash_handler
     propagate: no
 
 root:
   level: DEBUG
   handlers:
-    - default_handler
+    - console_handler
   propagate: no
